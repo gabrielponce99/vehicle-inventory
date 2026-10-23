@@ -35,6 +35,18 @@ public class VehicleInventory {
                 case 2:
                     searchMake(vehicles, scanner);
                     break;
+                case 3:
+                    searchPriceRange(vehicles, scanner);
+                    break;
+                case 4:
+                    searchColor(vehicles, scanner);
+                    break;
+                case 6:
+                    System.out.println("Bye bye!");
+                    break;
+                default:
+                    System.out.println("Invalid command, try again.");
+                    break;
             }
         }
 
@@ -54,6 +66,41 @@ public class VehicleInventory {
 
         for (Vehicle vehicle : vehicles) {
             if (vehicle != null && vehicle.getMakeModel().equalsIgnoreCase(model)) {
+                System.out.println(vehicle);
+            }
+        }
+    }
+
+    public static void searchPriceRange (Vehicle[] vehicles, Scanner scanner) {
+        System.out.println("Enter minimum price: ");
+        double min = scanner.nextDouble();
+        scanner.nextLine();
+
+        System.out.println("Enter maximum price: ");
+        double max = scanner.nextDouble();
+        scanner.nextLine();
+
+        boolean found = false;
+        System.out.println();
+
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle != null && vehicle.getPrice() >= min && vehicle.getPrice() <= max) {
+                System.out.println(vehicle);
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("There are no vehicles available between $" + min + " and $" + max);
+        }
+    }
+
+    public static void searchColor (Vehicle[] vehicles, Scanner scanner) {
+        System.out.println("Enter a color: ");
+        String color = scanner.nextLine();
+
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle != null && vehicle.getColor().equalsIgnoreCase(color)) {
                 System.out.println(vehicle);
             }
         }

@@ -13,15 +13,55 @@ public class VehicleInventory {
         vehicles[4] = new Vehicle(101125, "Subaru Outback", "Green", 55000, 14500);
         vehicles[5] = new Vehicle(101126, "Jeep Wrangler", "Yellow", 30000, 16000);
 
-        System.out.println(vehicles[0]);
+        Scanner scanner = new Scanner(System.in);
 
-        for (Vehicle currentVehicle : vehicles) {
-            if (currentVehicle != null) {
-                System.out.println(currentVehicle);
+        int command = 0;
+        while (command != 6) {
+            System.out.println("What do you want to do?\n");
+            System.out.println("1 - List all vehicles");
+            System.out.println("2 - Search by make/model");
+            System.out.println("3 - Search by price range");
+            System.out.println("4 - Search by color");
+            System.out.println("5 - Add a vehicle");
+            System.out.println("6 - Quit\n");
+            System.out.println("Enter your command:");
+            command = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (command) {
+                case 1:
+                    listAllVehicles(vehicles);
+                    break;
+                case 2:
+                    searchMake(vehicles, scanner);
+                    break;
             }
         }
 
     }
 
+    public static void listAllVehicles (Vehicle[] vehicles) {
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle != null) {
+                System.out.println(vehicle);
+            }
+        }
+    }
+
+    public static void searchMake (Vehicle[] vehicles, Scanner scanner) {
+        System.out.println("Enter a make/model: ");
+        String model = scanner.nextLine();
+
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle != null && vehicle.getMakeModel().equalsIgnoreCase(model)) {
+                System.out.println(vehicle);
+            }
+        }
+    }
+
 
 }
+
+
+
+
